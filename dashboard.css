@@ -1,0 +1,227 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/css.css to edit this template
+*/
+/* 
+    Created on : 22/04/2026, 5:04:47 p. m.
+    Author     : SALA-404
+*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #eef1f3;
+    color: #263238;
+}
+
+.container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* MENÚ LATERAL */
+.sidebar {
+    width: 230px;
+    background: #1f5f2f;
+    color: white;
+    padding: 20px 15px;
+}
+
+.sidebar h2 {
+    font-size: 20px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.sidebar ul {
+    list-style: none;
+}
+
+.sidebar ul li {
+    margin-bottom: 10px;
+}
+
+.sidebar ul li a,
+.sidebar ul li {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.sidebar ul li:hover,
+.sidebar ul li a:hover {
+    background: #2e7d32;
+}
+
+/* CONTENIDO */
+.main {
+    flex: 1;
+    padding: 25px;
+}
+
+.topbar {
+    background: #3f7f3a;
+    color: white;
+    padding: 18px 22px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.topbar h1 {
+    font-size: 24px;
+}
+
+.usuario-info {
+    font-weight: bold;
+}
+
+/* TARJETAS */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-bottom: 25px;
+}
+
+.card {
+    background: white;
+    padding: 22px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    text-align: center;
+    border-top: 6px solid #2e7d32;
+}
+
+.card h3 {
+    font-size: 16px;
+    margin-bottom: 12px;
+}
+
+.card p {
+    font-size: 30px;
+    font-weight: bold;
+    color: #2e7d32;
+}
+
+.card.verde {
+    border-top-color: #43a047;
+}
+
+.card.naranja {
+    border-top-color: #f9a825;
+}
+
+.card.rojo {
+    border-top-color: #e53935;
+}
+
+/* PANELES */
+.panel,
+.tabla,
+.formulario {
+    background: white;
+    padding: 22px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    margin-bottom: 25px;
+}
+
+.panel h2,
+.tabla h2,
+.formulario h2 {
+    color: #2e7d32;
+    margin-bottom: 18px;
+}
+
+/* FORMULARIOS */
+form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+form input,
+form select,
+form textarea {
+    padding: 11px;
+    border: 1px solid #cfd8dc;
+    border-radius: 7px;
+    width: 100%;
+}
+
+form textarea {
+    grid-column: span 2;
+    resize: vertical;
+}
+
+form button {
+    width: 180px;
+    padding: 12px;
+    background: #2e7d32;
+    color: white;
+    border: none;
+    border-radius: 7px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+form button:hover {
+    background: #1b5e20;
+}
+
+/* TABLAS */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 12px;
+}
+
+table th {
+    background: #2e7d32;
+    color: white;
+    padding: 12px;
+}
+
+table td {
+    padding: 11px;
+    border-bottom: 1px solid #ddd;
+}
+
+table tr:hover {
+    background: #f1f8e9;
+}
+
+/* ESTADOS */
+.estado-verde {
+    background: #dcedc8;
+    color: #2e7d32;
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.estado-naranja {
+    background: #fff3cd;
+    color: #ef6c00;
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.estado-rojo {
+    background: #ffcdd2;
+    color: #c62828;
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-weight: bold;
+}

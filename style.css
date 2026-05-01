@@ -1,0 +1,153 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/css.css to edit this template
+*/
+/* 
+    Created on : 22/04/2026, 5:03:44 p. m.
+    Author     : SALA-404
+*/
+
+body{
+    margin: 0;
+    padding: 0;
+    background-image: url("img/fondo.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+
+/* LOGIN */
+
+.login{
+height:100vh;
+background-image:url("fondo.jpg");
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
+
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.login-box{
+background:rgba(255,255,255,0.9);
+padding:30px;
+border-radius:10px;
+width:320px;
+text-align:center;
+box-shadow:0px 4px 15px rgba(0,0,0,0.3);
+}
+
+.login-box input,
+.login-box select{
+width:100%;
+padding:10px;
+margin:10px 0;
+border-radius:5px;
+border:1px solid #ccc;
+}
+
+.login-box button{
+width:100%;
+padding:10px;
+background:#2e7d32;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+font-weight:bold;
+}
+
+/* DASHBOARD */
+
+.dashboard{
+display:none;
+}
+
+header{
+background:#2e7d32;
+color:white;
+padding:15px;
+display:flex;
+justify-content:space-between;
+}
+
+.menu{
+width:60px;
+background:#1b5e20;
+height:100vh;
+position:fixed;
+}
+
+.menu ul{
+list-style:none;
+padding:0;
+}
+
+.menu li{
+color:white;
+padding:20px;
+text-align:center;
+cursor:pointer;
+}
+
+.contenido{
+margin-left:80px;
+padding:20px;
+}
+
+.cards{
+display:flex;
+gap:20px;
+}
+
+.card{
+padding:20px;
+border-radius:8px;
+color:white;
+width:200px;
+}
+
+.verde{
+background:#4caf50;
+}
+
+.naranja{
+background:#f9a825;
+}
+
+.rojo{
+background:#e53935;
+}
+
+.panel{
+margin-top:30px;
+background:white;
+padding:20px;
+border-radius:10px;
+}
+
+.barras{
+display:flex;
+gap:20px;
+margin-top:20px;
+}
+
+.barra{
+width:50px;
+height:120px;
+}
+
+.barra.verde{
+background:#4caf50;
+}
+
+.barra.naranja{
+background:#f9a825;
+}
+
+.barra.rojo{
+background:#e53935;
+}
