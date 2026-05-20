@@ -13,36 +13,36 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
-@WebServlet("/eliminarEspecie")
-public class EliminarEspecieServlet extends HttpServlet {
+@WebServlet("/eliminarPlaga")
+public class EliminarPlagaServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        int idEspecie = Integer.parseInt(request.getParameter("idEspecie"));
+        int idPlaga = Integer.parseInt(request.getParameter("idPlaga"));
 
         try (Connection con = ConexionBD.conectar()) {
 
             con.setAutoCommit(false);
 
-            PreparedStatement psRelacion =
-                con.prepareStatement(
-                    "DELETE FROM ESPECIE_PLAGA WHERE ID_ESPECIE=?"
-                );
-
-            psRelacion.setInt(1, idEspecie);
-
+            PreparedStatement psRelacion = con.prepareStatement(
+                "DELETE FROM ESPECIE_PLAGA WHERE ID_PLAGA = ?"
+            );
+            psRelacion.setInt(1, idPlaga);
             psRelacion.executeUpdate();
 
-            PreparedStatement psEspecie =
-                con.prepareStatement(
-                    "DELETE FROM ESPECIE WHERE ID_ESPECIE=?"
-                );
+            PreparedStatement psDetalle = con.prepareStatement(
+                "DELETE FROM DETALLE_INFORME_PLAGA WHERE ID_PLAGA = ?"
+            );
+            psDetalle.setInt(1, idPlaga);
+            psDetalle.executeUpdate();
 
-            psEspecie.setInt(1, idEspecie);
-
-            psEspecie.executeUpdate();
+            PreparedStatement psPlaga = con.prepareStatement(
+                "DELETE FROM PLAGA WHERE ID_PLAGA = ?"
+            );
+            psPlaga.setInt(1, idPlaga);
+            psPlaga.executeUpdate();
 
             con.commit();
 
@@ -50,7 +50,7 @@ public class EliminarEspecieServlet extends HttpServlet {
 
         } catch (Exception e) {
             e.printStackTrace();
-            response.getWriter().println("Error al eliminar especie: " + e.getMessage());
+            response.getWriter().println("Error al eliminar plaga: " + e.getMessage());
         }
     }
 }
