@@ -1,6 +1,6 @@
 <%-- 
-    Document   : productores
-    Created on : 28/04/2026, 5:47:56 p. m.
+    Document   : asistentes
+    Created on : 7/05/2026, 5:24:53 p. m.
     Author     : SALA-404
 --%>
 
@@ -27,7 +27,7 @@
 
 <meta charset="UTF-8">
 
-<title>Gestión de Productores</title>
+<title>Gestión de Asistentes Técnicos</title>
 
 <link rel="stylesheet" href="dashboard.css">
 
@@ -128,7 +128,7 @@ button:hover{
 
         <div class="topbar">
 
-            <h1>Gestión de Productores</h1>
+            <h1>Gestión de Asistentes Técnicos</h1>
 
             <p>
 
@@ -146,10 +146,12 @@ button:hover{
         <div class="card-total">
 
             <%
-                try(Connection con = ConexionBD.conectar()){
+                try(Connection con =
+                            ConexionBD.conectar()) {
 
                     String sqlTotal =
-                            "SELECT COUNT(*) TOTAL FROM PRODUCTOR";
+                            "SELECT COUNT(*) TOTAL " +
+                            "FROM ASISTENTE_TECNICO";
 
                     PreparedStatement psTotal =
                             con.prepareStatement(sqlTotal);
@@ -162,13 +164,14 @@ button:hover{
 
                 <h3>
 
-                    Total productores:
+                    Total asistentes técnicos:
                     <%= rsTotal.getInt("TOTAL") %>
 
                 </h3>
 
             <%
-                }catch(Exception e){
+                } catch(Exception e){
+
                     out.println("Error");
                 }
             %>
@@ -179,7 +182,8 @@ button:hover{
 
         <div class="buscador">
 
-            <form method="get" action="productores.jsp">
+            <form method="get"
+                  action="asistentes.jsp">
 
                 <input type="text"
                        name="buscar"
@@ -215,6 +219,8 @@ button:hover{
 
                     <th>Correo</th>
 
+                    <th>Tarjeta Profesional</th>
+
                     <th>Registro ICA</th>
 
                     <th>Estado</th>
@@ -241,12 +247,12 @@ button:hover{
                                 && !buscar.trim().isEmpty()) {
 
                             sql =
-                                "SELECT * FROM PRODUCTOR " +
+                                "SELECT * FROM ASISTENTE_TECNICO " +
                                 "WHERE " +
                                 "UPPER(NOMBRE) LIKE UPPER(?) " +
                                 "OR UPPER(NRO_IDENTIDAD) LIKE UPPER(?) " +
                                 "OR UPPER(NRO_REGISTRO_ICA) LIKE UPPER(?) " +
-                                "ORDER BY ID_PRODUCTOR";
+                                "ORDER BY ID_ASISTENTE";
 
                             ps =
                                 con.prepareStatement(sql);
@@ -267,8 +273,8 @@ button:hover{
                         else {
 
                             sql =
-                                "SELECT * FROM PRODUCTOR " +
-                                "ORDER BY ID_PRODUCTOR";
+                                "SELECT * FROM ASISTENTE_TECNICO " +
+                                "ORDER BY ID_ASISTENTE";
 
                             ps =
                                 con.prepareStatement(sql);
@@ -288,7 +294,7 @@ button:hover{
                 <tr>
 
                     <td>
-                        <%= rs.getInt("ID_PRODUCTOR") %>
+                        <%= rs.getInt("ID_ASISTENTE") %>
                     </td>
 
                     <td>
@@ -312,6 +318,10 @@ button:hover{
                     </td>
 
                     <td>
+                        <%= rs.getString("NRO_TARJETA_PROFESIONAL") %>
+                    </td>
+
+                    <td>
                         <%= rs.getString("NRO_REGISTRO_ICA") %>
                     </td>
 
@@ -321,7 +331,7 @@ button:hover{
 
                     <td>
 
-                        <a href="editarProductor.jsp?id=<%= rs.getInt("ID_PRODUCTOR") %>">
+                        <a href="editarAsistente.jsp?id=<%= rs.getInt("ID_ASISTENTE") %>">
 
                             <button type="button">
 
@@ -336,18 +346,19 @@ button:hover{
                 </tr>
 
                 <%
+
                         }
 
-                        // NO ENCONTRO
+                        // SI NO ENCUENTRA
 
                         if(!existe){
                 %>
 
                     <tr>
 
-                        <td colspan="9">
+                        <td colspan="10">
 
-                            No se encontraron productores
+                            No se encontraron asistentes técnicos
 
                         </td>
 
@@ -359,7 +370,7 @@ button:hover{
                     } catch(Exception e){
 
                         out.println(
-                            "<tr><td colspan='9'>Error: "
+                            "<tr><td colspan='10'>Error: "
                             + e.getMessage()
                             + "</td></tr>"
                         );
