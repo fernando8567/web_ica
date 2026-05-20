@@ -2,23 +2,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
-/**
- *
- * @author SALA-404
- */
 package servlet;
 
-import conexion.ConexionBD;
+import conexion.ConexionSeguridad;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import modelo.Usuario;
+import jakarta.servlet.http.*;
 
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -33,11 +26,15 @@ public class LoginServlet extends HttpServlet {
         String usuario = request.getParameter("usuario");
         String contrasena = request.getParameter("contrasena");
         String rol = request.getParameter("rol");
-        String accion = request.getParameter("accion");
 
-        String sql = "SELECT usuario, rol FROM usuarios WHERE usuario = ? AND contrasena = ? AND rol = ?";
+        String sql =
+                "SELECT USUARIO, ROL " +
+                "FROM USUARIOS " +
+                "WHERE USUARIO = ? " +
+                "AND CONTRASENA = ? " +
+                "AND ROL = ?";
 
-        try (Connection con = ConexionBD.conectar();
+        try (Connection con = ConexionSeguridad.conectar();
              PreparedStatement ps = con.prepareStatement(sql)) {
 
             ps.setString(1, usuario);
@@ -47,28 +44,44 @@ public class LoginServlet extends HttpServlet {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                Usuario u = new Usuario(rs.getString("usuario"), rs.getString("rol"));
 
+                // SESION AUTH-SERVICE
                 HttpSession session = request.getSession();
-                session.setAttribute("usuarioLogueado", u);
 
-                if ("admin".equals(u.getUsuario())
-                        && "Inspector ICA".equals(u.getRol())
-                        && "admin".equals(accion)) {
+                session.setAttribute("usuario", rs.getString("USUARIO"));
+                session.setAttribute("rol", rs.getString("ROL"));
 
-                    response.sendRedirect("usuarios.jsp");
+                String usuarioUrl =
+                        URLEncoder.encode(
+                                rs.getString("USUARIO"),
+                                StandardCharsets.UTF_8.toString()
+                        );
 
-                } else {
-                    response.sendRedirect("dashboard.jsp");
-                }
+                String rolUrl =
+                        URLEncoder.encode(
+                                rs.getString("ROL"),
+                                StandardCharsets.UTF_8.toString()
+                        );
+
+                response.sendRedirect(
+                        "http://localhost:8080/web_ica/recibirLogin?usuario="
+                                + usuarioUrl
+                                + "&rol="
+                                + rolUrl
+                );
 
             } else {
+
                 response.sendRedirect("index.jsp?error=1");
             }
 
         } catch (Exception e) {
+
             e.printStackTrace();
-            response.getWriter().println("Error en login: " + e.getMessage());
+
+            response.getWriter().println(
+                    "Error en login: " + e.getMessage()
+            );
         }
     }
 }
